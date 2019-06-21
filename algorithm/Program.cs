@@ -125,6 +125,16 @@ namespace MyConsoleApplication
             Helper.SoftByBubble(arrySoftByBubble, false);
             Console.WriteLine($"冒泡排序排序后={string.Join(",", arrySoftByBubble)}");
             Console.WriteLine();
+
+            int[] arrySoftBySelect = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
+            Helper.SoftBySelect(arrySoftBySelect, false);
+            Console.WriteLine($"选择排序排序后={string.Join(",", arrySoftBySelect)}");
+            Console.WriteLine();
+
+            int[] arrySoftByInsert = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
+            Helper.SoftByInsert(arrySoftByInsert, false);
+            Console.WriteLine($"插入排序排序后={string.Join(",", arrySoftByInsert)}");
+            Console.WriteLine();            
             #endregion
 
             #region 有一个8个数的数组{1,2,3,3,4,5,6,6}，计算其中不重复数字的个数。

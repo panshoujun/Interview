@@ -286,7 +286,7 @@ namespace algorithm
         /// </summary>
         /// <param name="arry">数组</param>
         /// <param name="isAsc">排序方式</param>
-        public static void SoftByBubble(int[] arry, bool isAsc = true)
+        public static void SoftByBubbleOld(int[] arry, bool isAsc = true)
         {
             if (null == arry)
                 throw new Exception("arry不能为null");
@@ -301,8 +301,79 @@ namespace algorithm
                         arry[i] = arry[j];
                         arry[j] = temp;
                     }
-
                 }
+
+            }
+        }
+
+        /// <summary>
+        /// 冒泡排序 0升序 1降序
+        /// </summary>
+        /// <param name="arry">数组</param>
+        /// <param name="isAsc">排序方式</param>
+        public static void SoftByBubble(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            int temp = 0;
+            for (int i = 0; i < arry.Length; i++)
+            {
+                for (int j = 0; j < arry.Length - 1 - i; j++)
+                {
+                    if (arry[j] > arry[j + 1] == isAsc)
+                    {
+                        temp = arry[j];
+                        arry[j] = arry[j + 1];
+                        arry[j + 1] = temp;
+                    }
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 选择排序
+        /// </summary>
+        /// <param name="arry"></param>
+        /// <param name="isAsc"></param>
+        public static void SoftBySelect(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            for (int i = 0; i < arry.Length; i++)
+            {
+                int index = i;
+                for (int j = i + 1; j < arry.Length; j++)
+                {
+                    if (arry[index] > arry[j] == isAsc)
+                        index = j;
+                }
+                int temp = arry[i];
+                arry[i] = arry[index];
+                arry[index] = temp;
+            }
+        }
+
+        /// <summary>
+        /// 插入排序
+        /// </summary>
+        /// <param name="arry"></param>
+        /// <param name="isAsc"></param>
+        public static void SoftByInsert(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            int current;
+            for (int i = 0; i < arry.Length - 1; i++)
+            {
+                current = arry[i + 1];
+                int index = i;
+                while (index >= 0 && current < arry[index] == isAsc)
+                {
+                    arry[index + 1] = arry[index];
+                    index--;
+                }
+                arry[index + 1] = current;
             }
         }
         #endregion
