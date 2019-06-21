@@ -10,8 +10,17 @@ namespace MyConsoleApplication
 {
     class Program
     {
+        static int a = 0;
         static void Main(string[] args)
         {
+            string s1 = "1\\//2\\//3\\//4";
+            var s2 = s1.Split("\\//");
+            if (Program.a is System.ValueType)
+            {
+                Console.WriteLine("Program.a is System.ValueType");
+            }
+            Ref(ref Program.a);
+            Ref2(out Program.a);
             #region 不借用第三个变量,怎么把a,b的值互换
             int a = 3;
             int b = 5;
@@ -132,6 +141,16 @@ namespace MyConsoleApplication
             #endregion
 
             Console.ReadLine();
+        }
+
+        public static void Ref(ref int a)
+        {
+
+        }
+
+        public static void Ref2(out int a)
+        {
+            a = 0;
         }
     }
 }
