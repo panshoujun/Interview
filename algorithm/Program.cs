@@ -160,6 +160,10 @@ namespace MyConsoleApplication
             Console.WriteLine($"求和结果:{Helper.Sum3(2, 4)}");
             #endregion
 
+            #region 字符串查找第一个不重复的字母
+            Console.WriteLine($"求和结果:{Helper.FindChar("aa")}");
+            #endregion
+
             Console.ReadLine();
         }
 

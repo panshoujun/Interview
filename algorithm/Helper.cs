@@ -534,5 +534,54 @@ namespace algorithm
             return Sum;
         }
         #endregion
+
+        #region 字符串查找第一个不重复的字母
+        ////会有问题 如aaaaaaaaaa
+        //public static char? FindChar(string str = "asfgasjfoiwoeqkwzxc")
+        //{
+        //    if (string.IsNullOrEmpty(str))
+        //        throw new Exception("参数不合法");
+        //    char? result = null;
+        //    for (int i = 0; i < str.Length; i++)
+        //    {
+        //        int count = 0;
+        //        for (int j = i + 1; j < str.Length; j++)
+        //        {
+        //            if (str[i] == str[j])
+        //                count++;
+        //        }
+        //        if (count == 0)
+        //        {
+        //            result = str[i];
+        //            break;
+        //        }
+
+        //    }
+        //    return result;
+        //}
+        public static char? FindChar(string str = "asfgasjfoiwoeqkwzxc")
+        {
+            if (string.IsNullOrEmpty(str))
+                throw new Exception("参数不合法");
+            char? result = null;
+            Dictionary<char, int> dic = new Dictionary<char, int>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (dic.ContainsKey(str[i]))
+                    dic[str[i]]++;
+                else
+                    dic[str[i]] = 1;
+            }
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (dic[str[i]] == 1)
+                {
+                    result = str[i];
+                    break;
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }
