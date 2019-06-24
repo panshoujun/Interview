@@ -164,6 +164,17 @@ namespace MyConsoleApplication
             Console.WriteLine($"求和结果:{Helper.FindChar("aa")}");
             #endregion
 
+            #region 一球从100米高度自由落下
+            decimal sum;
+            decimal now;
+            Helper.Run(100, 0.5m,1, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            Helper.Run(100, 0.5m, 3, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            Helper.Run(100, 0.5m, 10, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            #endregion
+
             Console.ReadLine();
         }
 
