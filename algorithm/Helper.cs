@@ -501,7 +501,7 @@ namespace algorithm
             if (chars.Length < length || val > int.MaxValue || val < int.MinValue)
                 throw new Exception("参数不合法");
             if (val < 0)
-            { 
+            {
                 val = Math.Abs(val);
                 sb.Append("-");
             }
@@ -514,8 +514,24 @@ namespace algorithm
 
             while (st.Count > 0)
                 sb.Append(st.Pop());
-            
+
             return sb.ToString();
+        }
+        #endregion
+
+        #region 求s=a+aa+aaa  例如2+22+222
+        public static int Sum3(int num, int length)
+        {
+            if (!(num > 0 && num < 10 && length > 0))
+                throw new Exception("参数不合法");
+            int Sum = 0;
+            int next = 0;
+            for (int i = 0; i < length; i++)
+            {
+                next = next * 10 + num;
+                Sum += next;
+            }
+            return Sum;
         }
         #endregion
     }

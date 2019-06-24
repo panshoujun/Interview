@@ -155,6 +155,11 @@ namespace MyConsoleApplication
             Console.WriteLine($"转换前{converNumber},转换后{Helper.Conver(converNumber, "0123", 4)}");
             #endregion
 
+            #region 求s=a+aa+aaa  例如2+22+222
+            Console.WriteLine($"求和结果:{Helper.Sum3(2,3)}");
+            Console.WriteLine($"求和结果:{Helper.Sum3(2, 4)}");
+            #endregion
+
             Console.ReadLine();
         }
 
