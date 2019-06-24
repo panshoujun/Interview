@@ -145,9 +145,14 @@ namespace MyConsoleApplication
             Console.WriteLine();
             #endregion
 
-            #region
+            #region 打印三角形
             Helper.InvertedPrintTriangle(10);
-            Helper.PrintTriangle(10);            
+            Helper.PrintTriangle(10);
+            #endregion
+
+            #region 进制转换
+            int converNumber = -100;            
+            Console.WriteLine($"转换前{converNumber},转换后{Helper.Conver(converNumber, "0123", 4)}");
             #endregion
 
             Console.ReadLine();

@@ -468,5 +468,55 @@ namespace algorithm
             }
         }
         #endregion
+
+        #region 进制转换
+        public static string ConverString(int val, string chars, int length)
+        {
+            string result = "";
+            if (chars.Length < length)
+                throw new Exception("参数不合法");
+            while (true)
+            {
+                int temp = val / length;
+                if (temp == 0)
+                {
+                    result += chars[length - 1];
+                    break;
+                }
+                else
+                {
+                    val = temp;
+                    result += chars[length - 1];
+                }
+            }
+
+            return result;
+        }
+
+        public static string Conver(int val, string chars, int length)
+        {
+            StringBuilder sb = new StringBuilder();
+            Stack<char> st = new Stack<char>();
+            int tempVal = val;
+            if (chars.Length < length || val > int.MaxValue || val < int.MinValue)
+                throw new Exception("参数不合法");
+            if (val < 0)
+            { 
+                val = Math.Abs(val);
+                sb.Append("-");
+            }
+            do
+            {
+                int next = val / length;
+                st.Push(chars[val % length]);
+                val = next;
+            } while (val > 0);
+
+            while (st.Count > 0)
+                sb.Append(st.Pop());
+            
+            return sb.ToString();
+        }
+        #endregion
     }
 }
