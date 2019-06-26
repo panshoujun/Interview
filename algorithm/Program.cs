@@ -183,6 +183,15 @@ namespace MyConsoleApplication
             Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray4(arr, arr.Length)}");
             #endregion
 
+            #region n阶台阶，一次走一步或两步，有多少种走法
+            //Console.WriteLine($"走阶梯算法0:sum={Helper.findStep2(0)}");
+            Console.WriteLine($"走阶梯算法1:sum={Helper.findStep2(1)}");
+            Console.WriteLine($"走阶梯算法2:sum={Helper.findStep2(2)}");
+            Console.WriteLine($"走阶梯算法3:sum={Helper.findStep2(3)}");
+            Console.WriteLine($"走阶梯算法4:sum={Helper.findStep2(4)}");
+            Console.WriteLine($"走阶梯算法5:sum={Helper.findStep2(5)}");
+            #endregion
+
             Console.ReadLine();
         }
 

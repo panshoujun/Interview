@@ -673,5 +673,30 @@ namespace algorithm
             now = height;
         }
         #endregion
+
+        #region n阶台阶，一次走一步或两步，有多少种走法
+        public static int findStep(int n)
+        {
+            if (n < 0)
+                throw new Exception("参数不合法");
+            if (n == 0 || n == 1 || n == 2)
+                return n;
+            return findStep(n - 1) + findStep(n - 2);
+        }
+        public static int findStep2(int n)
+        {
+            if (n < 0)
+                throw new Exception("参数不合法");
+            //if (n == 1)
+            //    return 1;
+            //else if (n == 2)
+            //    return 2;
+            if (n == 0 || n == 1 || n == 2)
+                return n;
+            else if (n == 3)
+                return 4;
+            return findStep2(n - 1) + findStep2(n - 2) + findStep2(n - 3);
+        }
+        #endregion
     }
 }
