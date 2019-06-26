@@ -59,6 +59,77 @@ namespace algorithm
         }
         #endregion
 
+        #region 求连续子数组的最大和
+        public static int GetMaxAddOfArray(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                throw new Exception("参数不合法");
+            int result = arr[0];
+            for (int i = 0; i < sz; i++)
+            {
+                for (int j = 0; j < sz; j++)
+                {
+                    int temp = 0;
+                    for (int k = i; k <= j; k++)
+                        temp += arr[k];
+
+                    if (temp > result)
+                        result = temp;
+                }
+            }
+            return result;
+        }
+        public static int GetMaxAddOfArray2(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                throw new Exception("参数不合法");
+            int result = arr[0];
+            for (int i = 0; i < sz; i++)
+            {
+                int temp = 0;
+                for (int j = i; j < sz; j++)
+                {
+                    temp += arr[j];
+                    if (temp > result)
+                        result = temp;
+                }
+            }
+            return result;
+        }
+        public static int GetMaxAddOfArray3(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 0)
+                return 0;
+            int Sum = arr[0];   //临时最大值
+            int MAX = arr[0];   //比较之后的最大值
+            for (int i = 1; i < sz; i++)
+            {
+                Sum = Sum + arr[i] > arr[i] ? Sum + arr[i] : arr[i];   //状态方程
+                if (Sum >= MAX)
+                    MAX = Sum;
+            }
+            return MAX;
+        }
+        public static int GetMaxAddOfArray4(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                return 0;
+            int MAX = arr[0];
+            int sum = arr[0];
+            for (int i = 1; i < sz; i++)
+            {
+                if (sum < 0)
+                    sum = arr[i];
+                else
+                    sum += arr[i];
+
+                if (sum > MAX)
+                    MAX = sum;
+            }
+            return MAX;
+        }
+        #endregion
+
         #region 数组反转置顶开始位置和结束位置
         public static void Reverse(int[] arry, int begin, int end)
         {

@@ -175,6 +175,14 @@ namespace MyConsoleApplication
             Console.WriteLine($"求和结果:sum={sum},now={now}");
             #endregion
 
+            #region 求连续子数组的最大和
+            int[] arr = { 1, -2, 3, 10, -4, 7, 2, -5 };//{ 1, 4, -5, 9, 8, 3, -6 };//{ 2, 3, -6, 4, 6, 2, -2, 5, -9 };//
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray2(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray3(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray4(arr, arr.Length)}");
+            #endregion
+
             Console.ReadLine();
         }
 
