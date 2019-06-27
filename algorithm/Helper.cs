@@ -59,6 +59,77 @@ namespace algorithm
         }
         #endregion
 
+        #region 求连续子数组的最大和
+        public static int GetMaxAddOfArray(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                throw new Exception("参数不合法");
+            int result = arr[0];
+            for (int i = 0; i < sz; i++)
+            {
+                for (int j = 0; j < sz; j++)
+                {
+                    int temp = 0;
+                    for (int k = i; k <= j; k++)
+                        temp += arr[k];
+
+                    if (temp > result)
+                        result = temp;
+                }
+            }
+            return result;
+        }
+        public static int GetMaxAddOfArray2(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                throw new Exception("参数不合法");
+            int result = arr[0];
+            for (int i = 0; i < sz; i++)
+            {
+                int temp = 0;
+                for (int j = i; j < sz; j++)
+                {
+                    temp += arr[j];
+                    if (temp > result)
+                        result = temp;
+                }
+            }
+            return result;
+        }
+        public static int GetMaxAddOfArray3(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 0)
+                return 0;
+            int Sum = arr[0];   //临时最大值
+            int MAX = arr[0];   //比较之后的最大值
+            for (int i = 1; i < sz; i++)
+            {
+                Sum = Sum + arr[i] > arr[i] ? Sum + arr[i] : arr[i];   //状态方程
+                if (Sum >= MAX)
+                    MAX = Sum;
+            }
+            return MAX;
+        }
+        public static int GetMaxAddOfArray4(int[] arr, int sz)
+        {
+            if (arr == null || sz <= 1)
+                return 0;
+            int MAX = arr[0];
+            int sum = arr[0];
+            for (int i = 1; i < sz; i++)
+            {
+                if (sum < 0)
+                    sum = arr[i];
+                else
+                    sum += arr[i];
+
+                if (sum > MAX)
+                    MAX = sum;
+            }
+            return MAX;
+        }
+        #endregion
+
         #region 数组反转置顶开始位置和结束位置
         public static void Reverse(int[] arry, int begin, int end)
         {
@@ -286,7 +357,7 @@ namespace algorithm
         /// </summary>
         /// <param name="arry">数组</param>
         /// <param name="isAsc">排序方式</param>
-        public static void SoftByBubble(int[] arry, bool isAsc = true)
+        public static void SoftByBubbleOld(int[] arry, bool isAsc = true)
         {
             if (null == arry)
                 throw new Exception("arry不能为null");
@@ -301,8 +372,79 @@ namespace algorithm
                         arry[i] = arry[j];
                         arry[j] = temp;
                     }
-
                 }
+
+            }
+        }
+
+        /// <summary>
+        /// 冒泡排序 0升序 1降序
+        /// </summary>
+        /// <param name="arry">数组</param>
+        /// <param name="isAsc">排序方式</param>
+        public static void SoftByBubble(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            int temp = 0;
+            for (int i = 0; i < arry.Length; i++)
+            {
+                for (int j = 0; j < arry.Length - 1 - i; j++)
+                {
+                    if (arry[j] > arry[j + 1] == isAsc)
+                    {
+                        temp = arry[j];
+                        arry[j] = arry[j + 1];
+                        arry[j + 1] = temp;
+                    }
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 选择排序
+        /// </summary>
+        /// <param name="arry"></param>
+        /// <param name="isAsc"></param>
+        public static void SoftBySelect(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            for (int i = 0; i < arry.Length; i++)
+            {
+                int index = i;
+                for (int j = i + 1; j < arry.Length; j++)
+                {
+                    if (arry[index] > arry[j] == isAsc)
+                        index = j;
+                }
+                int temp = arry[i];
+                arry[i] = arry[index];
+                arry[index] = temp;
+            }
+        }
+
+        /// <summary>
+        /// 插入排序
+        /// </summary>
+        /// <param name="arry"></param>
+        /// <param name="isAsc"></param>
+        public static void SoftByInsert(int[] arry, bool isAsc = true)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            int current;
+            for (int i = 0; i < arry.Length - 1; i++)
+            {
+                current = arry[i + 1];
+                int index = i;
+                while (index >= 0 && current < arry[index] == isAsc)
+                {
+                    arry[index + 1] = arry[index];
+                    index--;
+                }
+                arry[index + 1] = current;
             }
         }
         #endregion
@@ -395,6 +537,165 @@ namespace algorithm
                 Console.Write("*");
                 count--;
             }
+        }
+        #endregion
+
+        #region 进制转换
+        public static string ConverString(int val, string chars, int length)
+        {
+            string result = "";
+            if (chars.Length < length)
+                throw new Exception("参数不合法");
+            while (true)
+            {
+                int temp = val / length;
+                if (temp == 0)
+                {
+                    result += chars[length - 1];
+                    break;
+                }
+                else
+                {
+                    val = temp;
+                    result += chars[length - 1];
+                }
+            }
+
+            return result;
+        }
+
+        public static string Conver(int val, string chars, int length)
+        {
+            StringBuilder sb = new StringBuilder();
+            Stack<char> st = new Stack<char>();
+            int tempVal = val;
+            if (chars.Length < length || val > int.MaxValue || val < int.MinValue)
+                throw new Exception("参数不合法");
+            if (val < 0)
+            {
+                val = Math.Abs(val);
+                sb.Append("-");
+            }
+            do
+            {
+                int next = val / length;
+                st.Push(chars[val % length]);
+                val = next;
+            } while (val > 0);
+
+            while (st.Count > 0)
+                sb.Append(st.Pop());
+
+            return sb.ToString();
+        }
+        #endregion
+
+        #region 求s=a+aa+aaa  例如2+22+222
+        public static int Sum3(int num, int length)
+        {
+            if (!(num > 0 && num < 10 && length > 0))
+                throw new Exception("参数不合法");
+            int Sum = 0;
+            int next = 0;
+            for (int i = 0; i < length; i++)
+            {
+                next = next * 10 + num;
+                Sum += next;
+            }
+            return Sum;
+        }
+        #endregion
+
+        #region 字符串查找第一个不重复的字母
+        ////会有问题 如aaaaaaaaaa
+        //public static char? FindChar(string str = "asfgasjfoiwoeqkwzxc")
+        //{
+        //    if (string.IsNullOrEmpty(str))
+        //        throw new Exception("参数不合法");
+        //    char? result = null;
+        //    for (int i = 0; i < str.Length; i++)
+        //    {
+        //        int count = 0;
+        //        for (int j = i + 1; j < str.Length; j++)
+        //        {
+        //            if (str[i] == str[j])
+        //                count++;
+        //        }
+        //        if (count == 0)
+        //        {
+        //            result = str[i];
+        //            break;
+        //        }
+
+        //    }
+        //    return result;
+        //}
+        public static char? FindChar(string str = "asfgasjfoiwoeqkwzxc")
+        {
+            if (string.IsNullOrEmpty(str))
+                throw new Exception("参数不合法");
+            char? result = null;
+            Dictionary<char, int> dic = new Dictionary<char, int>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (dic.ContainsKey(str[i]))
+                    dic[str[i]]++;
+                else
+                    dic[str[i]] = 1;
+            }
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (dic[str[i]] == 1)
+                {
+                    result = str[i];
+                    break;
+                }
+            }
+            return result;
+        }
+        #endregion
+
+        #region  一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+        public static void Run(decimal height, decimal next, int count, out decimal sum, out decimal now)
+        {
+            if (height <= 0 || next >= 1 || next < 0 || count <= 0)
+            {
+                throw new Exception("参数不合法");
+            }
+            sum = 0;
+            now = 0;
+            for (int i = 1; i <= count; i++)
+            {
+                sum = sum + height + height * next;
+                height *= next;
+            }
+
+            now = height;
+        }
+        #endregion
+
+        #region n阶台阶，一次走一步或两步，有多少种走法
+        public static int findStep(int n)
+        {
+            if (n < 0)
+                throw new Exception("参数不合法");
+            if (n == 0 || n == 1 || n == 2)
+                return n;
+            return findStep(n - 1) + findStep(n - 2);
+        }
+        public static int findStep2(int n)
+        {
+            if (n < 0)
+                throw new Exception("参数不合法");
+            //if (n == 1)
+            //    return 1;
+            //else if (n == 2)
+            //    return 2;
+            if (n == 0 || n == 1 || n == 2)
+                return n;
+            else if (n == 3)
+                return 4;
+            return findStep2(n - 1) + findStep2(n - 2) + findStep2(n - 3);
         }
         #endregion
     }
