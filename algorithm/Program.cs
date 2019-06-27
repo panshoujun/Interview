@@ -10,12 +10,32 @@ namespace MyConsoleApplication
 {
     class Program
     {
+        static int a = 0;
         static void Main(string[] args)
         {
             Father father = new Father();
             father.PrintNew();
             father = new Son();
             father.PrintNew();
+            Copy copy = new Copy() {  Age="1",name="a"};
+            var copy2 = copy.Clone();
+            if (copy==copy2)
+            {
+                Console.WriteLine("copy==copy2");
+            }
+            var copy3 = copy;
+            if (copy == copy3)
+            {
+                Console.WriteLine("copy==copy3");
+            }
+            string s1 = "1\\//2\\//3\\//4";
+            var s2 = s1.Split("\\//");
+            if (Program.a is System.ValueType)
+            {
+                Console.WriteLine("Program.a is System.ValueType");
+            }
+            Ref(ref Program.a);
+            Ref2(out Program.a);
             #region 不借用第三个变量,怎么把a,b的值互换
             int a = 3;
             int b = 5;
@@ -120,6 +140,16 @@ namespace MyConsoleApplication
             Helper.SoftByBubble(arrySoftByBubble, false);
             Console.WriteLine($"冒泡排序排序后={string.Join(",", arrySoftByBubble)}");
             Console.WriteLine();
+
+            int[] arrySoftBySelect = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
+            Helper.SoftBySelect(arrySoftBySelect, false);
+            Console.WriteLine($"选择排序排序后={string.Join(",", arrySoftBySelect)}");
+            Console.WriteLine();
+
+            int[] arrySoftByInsert = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
+            Helper.SoftByInsert(arrySoftByInsert, false);
+            Console.WriteLine($"插入排序排序后={string.Join(",", arrySoftByInsert)}");
+            Console.WriteLine();            
             #endregion
 
             #region 有一个8个数的数组{1,2,3,3,4,5,6,6}，计算其中不重复数字的个数。
@@ -130,12 +160,64 @@ namespace MyConsoleApplication
             Console.WriteLine();
             #endregion
 
-            #region
+            #region 打印三角形
             Helper.InvertedPrintTriangle(10);
-            Helper.PrintTriangle(10);            
+            Helper.PrintTriangle(10);
+            #endregion
+
+            #region 进制转换
+            int converNumber = -100;            
+            Console.WriteLine($"转换前{converNumber},转换后{Helper.Conver(converNumber, "0123", 4)}");
+            #endregion
+
+            #region 求s=a+aa+aaa  例如2+22+222
+            Console.WriteLine($"求和结果:{Helper.Sum3(2,3)}");
+            Console.WriteLine($"求和结果:{Helper.Sum3(2, 4)}");
+            #endregion
+
+            #region 字符串查找第一个不重复的字母
+            Console.WriteLine($"求和结果:{Helper.FindChar("aa")}");
+            #endregion
+
+            #region 一球从100米高度自由落下
+            decimal sum;
+            decimal now;
+            Helper.Run(100, 0.5m,1, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            Helper.Run(100, 0.5m, 3, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            Helper.Run(100, 0.5m, 10, out sum, out now);
+            Console.WriteLine($"求和结果:sum={sum},now={now}");
+            #endregion
+
+            #region 求连续子数组的最大和
+            int[] arr = { 1, -2, 3, 10, -4, 7, 2, -5 };//{ 1, 4, -5, 9, 8, 3, -6 };//{ 2, 3, -6, 4, 6, 2, -2, 5, -9 };//
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray2(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray3(arr, arr.Length)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray4(arr, arr.Length)}");
+            #endregion
+
+            #region n阶台阶，一次走一步或两步，有多少种走法
+            //Console.WriteLine($"走阶梯算法0:sum={Helper.findStep2(0)}");
+            Console.WriteLine($"走阶梯算法1:sum={Helper.findStep2(1)}");
+            Console.WriteLine($"走阶梯算法2:sum={Helper.findStep2(2)}");
+            Console.WriteLine($"走阶梯算法3:sum={Helper.findStep2(3)}");
+            Console.WriteLine($"走阶梯算法4:sum={Helper.findStep2(4)}");
+            Console.WriteLine($"走阶梯算法5:sum={Helper.findStep2(5)}");
             #endregion
 
             Console.ReadLine();
+        }
+
+        public static void Ref(ref int a)
+        {
+
+        }
+
+        public static void Ref2(out int a)
+        {
+            a = 0;
         }
     }
 }
