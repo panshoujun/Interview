@@ -13,6 +13,17 @@ namespace MyConsoleApplication
         static int a = 0;
         static void Main(string[] args)
         {
+            Copy copy = new Copy() {  Age="1",name="a"};
+            var copy2 = copy.Clone();
+            if (copy==copy2)
+            {
+                Console.WriteLine("copy==copy2");
+            }
+            var copy3 = copy;
+            if (copy == copy3)
+            {
+                Console.WriteLine("copy==copy3");
+            }
             string s1 = "1\\//2\\//3\\//4";
             var s2 = s1.Split("\\//");
             if (Program.a is System.ValueType)
