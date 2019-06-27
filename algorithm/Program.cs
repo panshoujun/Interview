@@ -12,6 +12,10 @@ namespace MyConsoleApplication
     {
         static void Main(string[] args)
         {
+            Father father = new Father();
+            father.PrintNew();
+            father = new Son();
+            father.PrintNew();
             #region 不借用第三个变量,怎么把a,b的值互换
             int a = 3;
             int b = 5;
