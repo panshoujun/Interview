@@ -698,5 +698,39 @@ namespace algorithm
             return findStep2(n - 1) + findStep2(n - 2) + findStep2(n - 3);
         }
         #endregion
+
+        #region 找出一个数组中重复次数大于minTimes的数字
+        public static int[] FindDuplicationLq(int[] arry, uint minTimes)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            List<int> list = new List<int>();
+            var goup = arry.GroupBy(m => m);
+            var items = goup.Where(p => p.Count() >= minTimes);
+            foreach (var item in items)
+                list.Add(item.Key);
+            return list.ToArray();
+        }
+        public static int[] FindDuplication(int[] arry, uint minTimes)
+        {
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            List<int> list = new List<int>();
+            foreach (var item in arry)
+            {
+                if (dic.ContainsKey(item))
+                    dic[item]++;
+                else
+                    dic.Add(item, 1);
+            }
+            foreach (var item in dic)
+            {
+                if (item.Value >= minTimes)
+                    list.Add(item.Key);
+            }
+            return list.ToArray();
+        }
+        #endregion
     }
 }

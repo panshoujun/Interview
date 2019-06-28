@@ -17,9 +17,9 @@ namespace MyConsoleApplication
             father.PrintNew();
             father = new Son();
             father.PrintNew();
-            Copy copy = new Copy() {  Age="1",name="a"};
+            Copy copy = new Copy() { Age = "1", name = "a" };
             var copy2 = copy.Clone();
-            if (copy==copy2)
+            if (copy == copy2)
             {
                 Console.WriteLine("copy==copy2");
             }
@@ -149,7 +149,7 @@ namespace MyConsoleApplication
             int[] arrySoftByInsert = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
             Helper.SoftByInsert(arrySoftByInsert, false);
             Console.WriteLine($"插入排序排序后={string.Join(",", arrySoftByInsert)}");
-            Console.WriteLine();            
+            Console.WriteLine();
             #endregion
 
             #region 有一个8个数的数组{1,2,3,3,4,5,6,6}，计算其中不重复数字的个数。
@@ -166,12 +166,12 @@ namespace MyConsoleApplication
             #endregion
 
             #region 进制转换
-            int converNumber = -100;            
+            int converNumber = -100;
             Console.WriteLine($"转换前{converNumber},转换后{Helper.Conver(converNumber, "0123", 4)}");
             #endregion
 
             #region 求s=a+aa+aaa  例如2+22+222
-            Console.WriteLine($"求和结果:{Helper.Sum3(2,3)}");
+            Console.WriteLine($"求和结果:{Helper.Sum3(2, 3)}");
             Console.WriteLine($"求和结果:{Helper.Sum3(2, 4)}");
             #endregion
 
@@ -182,7 +182,7 @@ namespace MyConsoleApplication
             #region 一球从100米高度自由落下
             decimal sum;
             decimal now;
-            Helper.Run(100, 0.5m,1, out sum, out now);
+            Helper.Run(100, 0.5m, 1, out sum, out now);
             Console.WriteLine($"求和结果:sum={sum},now={now}");
             Helper.Run(100, 0.5m, 3, out sum, out now);
             Console.WriteLine($"求和结果:sum={sum},now={now}");
@@ -206,6 +206,14 @@ namespace MyConsoleApplication
             Console.WriteLine($"走阶梯算法4:sum={Helper.findStep2(4)}");
             Console.WriteLine($"走阶梯算法5:sum={Helper.findStep2(5)}");
             #endregion
+
+            #region  找出一个数组中重复次数大于minTimes的数字
+            int[] arrFindDuplication = { 1, 2, 5, 1, 3, 1, 9, 20, 15, 5, 2, 9, 3, 15, 2 };
+            var temp = Helper.FindDuplication(arrFindDuplication, 5);
+            string[] outputFindDuplication = Array.ConvertAll<int, string>(Helper.FindDuplicationLq(arrFindDuplication, 5), i => i.ToString());
+            Console.WriteLine($"FindDuplication={string.Join(",", outputFindDuplication)}");
+            #endregion
+
 
             Console.ReadLine();
         }
