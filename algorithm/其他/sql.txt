@@ -1,0 +1,30 @@
+拷贝表(拷贝数据)
+insert into b(a, b, c) select d,e,f from a; 
+
+复制表(表机构)
+ select * into b from a where 1<>1  (where1=1，拷贝表结构和数据内容)
+
+用一条SQL 语句 查询出每门课都大于80 分的学生姓名
+select distinct name from table where name not in (select distinct name from table where fenshu<=80)
+select name from table group by name having min(fenshu)>80
+
+删除除了自动编号不同, 其他都相同的学生冗余信息
+delete tablename where 自动编号 not in(select min( 自动编号) from tablename 
+ group by学号, 姓名, 课程编号, 课程名称, 分数)。
+
+查询“001”课程比“002”课程成绩高的所有学生的学号；
+select a.stuId from (select stuId,score from Scores where courseId='001') a,(select stuId,score
+  from Scores where courseId='002') b  where a.score>b.score and a.stuId=b.stuId;
+
+查询没学过“叶平”老师课的同学的学号、姓名；
+ select Student.stuId,Student.stuName from Student where stuId not in
+ (select distinct( Scores.stuId) from Scores,Course,Teacher where  Scores.courseId=
+Course.courseId and Teacher.teacherId=Course.teacherId and Teacher.teacherName='叶平');
+
+查询没有学全所有课的同学的学号、姓名；
+select Student.stuId,Student.stuName from Student,Scores where Student.stuId=Scores.stuId group 
+by Student.stuId,Student.stuName having count(courseId) <(select count(courseId) from Course);
+
+加5分单门不能超过100
+update Score set Score=100 where Score>=95;
+update Score set Score=Score+5 where Score<95;
