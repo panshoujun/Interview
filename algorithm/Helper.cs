@@ -732,5 +732,30 @@ namespace algorithm
             return list.ToArray();
         }
         #endregion
+
+        #region 输入一个字符串1234,编写代码打印出来改字符串的所有排列 如1234. 输出所有排列可能：1234 1324 1423 1432。
+        public static void permutation(char[] str, int i)
+        {
+            if (i >= str.Length)
+                return;
+            if (i == str.Length - 1)
+            {
+                Console.WriteLine(new string(str));
+            }
+            else
+            {
+                for (int j = i; j < str.Length; j++)
+                {
+                    char temp = str[j];
+                    str[j] = str[i];
+                    str[i] = temp;
+                    permutation(str, i + 1);
+                    temp = str[j];
+                    str[j] = str[i];
+                    str[i] = temp;
+                }
+            }
+        }
+        #endregion
     }
 }
