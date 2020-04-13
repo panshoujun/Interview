@@ -191,11 +191,13 @@ namespace MyConsoleApplication
             #endregion
 
             #region 求连续子数组的最大和
-            int[] arr = { 1, -2, 3, 10, -4, 7, 2, -5 };//{ 1, 4, -5, 9, 8, 3, -6 };//{ 2, 3, -6, 4, 6, 2, -2, 5, -9 };//
-            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray(arr, arr.Length)}");
-            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray2(arr, arr.Length)}");
-            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray3(arr, arr.Length)}");
-            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray4(arr, arr.Length)}");
+            int[] arr = { 1, -2, 1, 10, -4, 7, 2, -5 };//{ 1, 4, -5, 9, 8, 3, -6 };//{ 2, 3, -6, 4, 6, 2, -2, 5, -9 };//
+            var GetMaxAddAndArray=Helper.GetMaxAddAndArray(arr);
+            Console.WriteLine($"求连续子数组的最大和:sum={GetMaxAddAndArray.Item1},arr={string.Join(',',(int[])GetMaxAddAndArray.Item2)}");
+            var GetMaxAddAndArray2 = Helper.GetMaxAddAndArray2(arr);
+            Console.WriteLine($"求连续子数组的最大和:sum={GetMaxAddAndArray2.Item1},arr={string.Join(',', (int[])GetMaxAddAndArray2.Item2)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray3(arr)}");
+            Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray4(arr)}");
             #endregion
 
             #region n阶台阶，一次走一步或两步，有多少种走法

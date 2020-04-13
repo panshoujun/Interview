@@ -60,10 +60,11 @@ namespace algorithm
         #endregion
 
         #region 求连续子数组的最大和
-        public static int GetMaxAddOfArray(int[] arr, int sz)
+        public static int GetMaxAddOfArray(int[] arr)
         {
-            if (arr == null || sz <= 1)
+            if (arr == null || arr.Length <= 1)
                 throw new Exception("参数不合法");
+            int sz = arr.Length;
             int result = arr[0];
             for (int i = 0; i < sz; i++)
             {
@@ -79,10 +80,11 @@ namespace algorithm
             }
             return result;
         }
-        public static int GetMaxAddOfArray2(int[] arr, int sz)
+        public static int GetMaxAddOfArray2(int[] arr)
         {
-            if (arr == null || sz <= 1)
+            if (arr == null || arr.Length <= 1)
                 throw new Exception("参数不合法");
+            int sz = arr.Length;
             int result = arr[0];
             for (int i = 0; i < sz; i++)
             {
@@ -96,10 +98,11 @@ namespace algorithm
             }
             return result;
         }
-        public static int GetMaxAddOfArray3(int[] arr, int sz)
+        public static int GetMaxAddOfArray3(int[] arr)
         {
-            if (arr == null || sz <= 0)
-                return 0;
+            if (arr == null || arr.Length <= 1)
+                throw new Exception("参数不合法");
+            int sz = arr.Length;
             int Sum = arr[0];   //临时最大值
             int MAX = arr[0];   //比较之后的最大值
             for (int i = 1; i < sz; i++)
@@ -110,12 +113,13 @@ namespace algorithm
             }
             return MAX;
         }
-        public static int GetMaxAddOfArray4(int[] arr, int sz)
+        public static int GetMaxAddOfArray4(int[] arr)
         {
-            if (arr == null || sz <= 1)
-                return 0;
-            int MAX = arr[0];
-            int sum = arr[0];
+            if (arr == null || arr.Length <= 1)
+                throw new Exception("参数不合法");
+            int sz = arr.Length;
+            int sum = arr[0];//临时最大值
+            int MAX = arr[0];//比较之后的最大值
             for (int i = 1; i < sz; i++)
             {
                 if (sum < 0)
@@ -127,6 +131,72 @@ namespace algorithm
                     MAX = sum;
             }
             return MAX;
+        }
+        #endregion
+
+        #region 求连续子数组的最大和 且 返回子数组
+        public static Tuple<int, Array> GetMaxAddAndArray(int[] arr)
+        {
+            if (arr == null || arr.Length <= 1)
+                throw new Exception("参数不合法");
+            int sz = arr.Length;
+            int result = arr[0];
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < sz; i++)
+            {
+                for (int j = 0; j < sz; j++)
+                {
+                    int temp = 0;
+                    for (int k = i; k <= j; k++)
+                        temp += arr[k];
+
+                    if (temp > result)
+                    {
+                        start = i;
+                        end = j;
+                        result = temp;
+                    }
+                }
+            }
+
+            List<int> list = new List<int>();
+            for (int i = start; i <= end; i++)
+            {
+                list.Add(arr[i]);
+            }
+            Tuple<int, Array> tuple = new Tuple<int, Array>(result, list.ToArray());
+            return tuple;
+        }
+        public static Tuple<int, Array> GetMaxAddAndArray2(int[] arr)
+        {
+            if (arr == null || arr.Length <= 1)
+                throw new Exception("参数不合法");
+            int sz = arr.Length;
+            int result = arr[0];
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < sz; i++)
+            {
+                int temp = 0;
+                for (int j = i; j < sz; j++)
+                {
+                    temp += arr[j];
+                    if (temp > result)
+                    {
+                        start = i;
+                        end = j;
+                        result = temp;
+                    }
+                }
+            }
+            List<int> list = new List<int>();
+            for (int i = start; i <= end; i++)
+            {
+                list.Add(arr[i]);
+            }
+            Tuple<int, Array> tuple = new Tuple<int, Array>(result, list.ToArray());
+            return tuple;
         }
         #endregion
 
