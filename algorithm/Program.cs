@@ -75,20 +75,26 @@ namespace MyConsoleApplication
             Console.WriteLine(string.Format("删除集合给定元素前aList={0}", string.Join(",", aList)));
             Helper.deleteForm(aList, 1);
             Console.WriteLine(string.Format("删除集合给定元素后aList={0}", string.Join(",", aList)));
+
+
+            List<string> bList = new List<string> { "a", "b", "c", "c", "1", "2", "3", "1" };
+            Console.WriteLine(string.Format("删除集合给定元素前aList={0}", string.Join(",", bList)));
+            Helper.deleteForm(bList, "1",true);
+            Console.WriteLine(string.Format("删除集合给定元素后aList={0}", string.Join(",", bList)));
             Console.WriteLine();
             #endregion
 
             #region 数组合并去重
-            int[] arryA = { 1, 2, 3, 4, 5 };
+            int[] arryA = { 1, 2, 3, 4,4, 5 };
             int[] arryB = { 3, 5, 6 };
-            string[] outputA = Array.ConvertAll<int, string>(arryA, i => i.ToString());
-            Console.WriteLine(string.Format("数组合并去重数组arryA={0}", string.Join(",", outputA)));
-            string[] outputB = Array.ConvertAll<int, string>(arryB, i => i.ToString());
-            Console.WriteLine(string.Format("数组合并去重数组arryB={0}", string.Join(",", outputB)));
+            //string[] outputA = Array.ConvertAll<int, string>(arryA, i => i.ToString());
+            Console.WriteLine(string.Format("数组合并去重数组arryA={0}", string.Join(",", arryA)));
+            //string[] outputB = Array.ConvertAll<int, string>(arryB, i => i.ToString());
+            Console.WriteLine(string.Format("数组合并去重数组arryB={0}", string.Join(",", arryB)));
 
-            var resultArray = Helper.CombinedArray(arryA, arryB);
-            string[] outputResult = Array.ConvertAll<int, string>(resultArray, i => i.ToString());
-            Console.WriteLine(string.Format("数组合并去重数组resultArray={0}", string.Join(",", outputResult)));
+            var resultArray = Helper.CombinedArrayNew<int>(arryA, arryB);
+            //string[] outputResult = Array.ConvertAll<int, string>(resultArray, i => i.ToString());
+            Console.WriteLine(string.Format("数组合并去重数组resultArray={0}", string.Join(",", resultArray)));
             Console.WriteLine();
             #endregion
 
@@ -192,8 +198,8 @@ namespace MyConsoleApplication
 
             #region 求连续子数组的最大和
             int[] arr = { 1, -2, 1, 10, -4, 7, 2, -5 };//{ 1, 4, -5, 9, 8, 3, -6 };//{ 2, 3, -6, 4, 6, 2, -2, 5, -9 };//
-            var GetMaxAddAndArray=Helper.GetMaxAddAndArray(arr);
-            Console.WriteLine($"求连续子数组的最大和:sum={GetMaxAddAndArray.Item1},arr={string.Join(',',(int[])GetMaxAddAndArray.Item2)}");
+            var GetMaxAddAndArray = Helper.GetMaxAddAndArray(arr);
+            Console.WriteLine($"求连续子数组的最大和:sum={GetMaxAddAndArray.Item1},arr={string.Join(',', (int[])GetMaxAddAndArray.Item2)}");
             var GetMaxAddAndArray2 = Helper.GetMaxAddAndArray2(arr);
             Console.WriteLine($"求连续子数组的最大和:sum={GetMaxAddAndArray2.Item1},arr={string.Join(',', (int[])GetMaxAddAndArray2.Item2)}");
             Console.WriteLine($"求连续子数组的最大和:sum={Helper.GetMaxAddOfArray3(arr)}");

@@ -249,6 +249,23 @@ namespace algorithm
             while (aList.Contains(key))//删除所有
                 aList.Remove(key);
         }
+
+        public static void deleteForm<T>(IList<T> aList, T key, bool deleteAll = false)
+        {
+            if (null == aList)
+                throw new Exception("aList不能为null");
+
+            if (deleteAll)
+            {
+                while (aList.Contains(key))//删除所有
+                    aList.Remove(key);
+            }
+            else
+            {
+                if (aList.Contains(key)) aList.Remove(key);//删除单个
+            }
+
+        }
         #endregion
 
         #region 数组合并去重
@@ -257,6 +274,35 @@ namespace algorithm
             if (null == a || null == b)
                 throw new Exception("arry不能为null");
             var _list = a.ToList();
+            foreach (var item in b)
+            {
+                if (!_list.Contains(item))
+                    _list.Add(item);
+            }
+            return _list.ToArray();
+        }
+        public static T[] CombinedArray<T>(T[] a, T[] b)
+        {
+            if (null == a || null == b)
+                throw new Exception("arry不能为null");
+            var _list = a.ToList();
+            foreach (var item in b)
+            {
+                if (!_list.Contains(item))
+                    _list.Add(item);
+            }
+            return _list.ToArray();
+        }
+        public static T[] CombinedArrayNew<T>(T[] a, T[] b)
+        {
+            if (null == a || null == b)
+                throw new Exception("arry不能为null");
+            List<T> _list = new List<T>();
+            foreach (var item in a)
+            {
+                if (!_list.Contains(item))
+                    _list.Add(item);
+            }
             foreach (var item in b)
             {
                 if (!_list.Contains(item))
