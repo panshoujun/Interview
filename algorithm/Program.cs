@@ -117,7 +117,7 @@ namespace MyConsoleApplication
             string[] outputArray = Array.ConvertAll<int, string>(array, i => i.ToString());
             Console.WriteLine(string.Format("数组outputArray={0}", string.Join(",", outputArray)));
 
-            var arrayNew = Helper.CreateArr(10, 1, 100);
+            var arrayNew = Helper.CreateArr(10, 1, 10);
             Console.WriteLine(string.Format("数组outputArray={0}", string.Join(",", arrayNew)));
             Console.WriteLine();
             #endregion

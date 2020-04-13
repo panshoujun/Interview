@@ -439,18 +439,20 @@ namespace algorithm
             return myList.ToArray();
         }
 
-        public static int[] CreateArr(int arrLength,int min,int max)
+        public static int[] CreateArr(int arrLength, int min, int max)
         {
             if (arrLength < 0)
                 throw new Exception("参数不合法");
             if (min > max)
                 throw new Exception("范围起始不能大于结束");
+            if (max - min < arrLength - 1)
+                throw new Exception("范围差要大于等于数组长度");
             int[] intArr = new int[arrLength];
             IList<int> myList = new List<int>();
             Random rnd = new Random();
             while (myList.Count < arrLength)
             {
-                int num = rnd.Next(min, max);
+                int num = rnd.Next(min, max + 1);
                 if (!myList.Contains(num))
                     myList.Add(num);
             }
