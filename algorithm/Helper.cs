@@ -318,7 +318,7 @@ namespace algorithm
         /// 两个数组  [n] [m]  n>m  第一个数组的数字无序排列 第二个数组为空 取出第一个数组的最小值
         /// 放到第二个数组中第一个位置, 依次类推. 不能改变A数组，不能对之进行排序，也不可以倒到别的数组中。
         /// </summary>
-        public static void GetArr(int[] n, int[] m)
+        public static void GetArr(int[] n, int[] m)//最小放第一
         {
             if (n.Length <= m.Length)
                 throw new Exception("参数不合法");
@@ -343,8 +343,33 @@ namespace algorithm
                 intTmp = intMaxNum;
             }
         }
+        public static void GetArr2(int[] n, int[] m)//最大放第一
+        {
+            if (n.Length <= m.Length)
+                throw new Exception("参数不合法");
+            int intTmp = n[0];
+            int intMinNum;
+            for (int i = 0; i < n.Length; i++)
+                intTmp = n[i] < intTmp ? n[i] : intTmp;
+            intMinNum = intTmp;
+            for (int j = 0; j < m.Length; j++)
+            {
+                for (int i = 0; i < n.Length; i++)
+                {
+                    if (j == 0)
+                        intTmp = n[i] > intTmp ? n[i] : intTmp;
+                    else
+                    {
+                        if (n[i] < m[j - 1])
+                            intTmp = n[i] > intTmp ? n[i] : intTmp;
+                    }
+                }
+                m[j] = intTmp;
+                intTmp = intMinNum;
+            }
+        }
 
-        public static void GetArr2(int[] n, int[] m)
+        public static void GetArrNew(int[] n, int[] m)//最小放最后
         {
             if (n.Length <= m.Length)
                 throw new Exception("参数不合法");
@@ -367,6 +392,32 @@ namespace algorithm
                 }
                 m[j] = intTmp;
                 intTmp = intMaxNum;
+            }
+        }
+
+        public static void GetArr2New(int[] n, int[] m)//最大放最后
+        {
+            if (n.Length <= m.Length)
+                throw new Exception("参数不合法");
+            int intTmp = n[0];
+            int intMinNum;
+            for (int i = 0; i < n.Length; i++)
+                intTmp = n[i] < intTmp ? n[i] : intTmp;
+            intMinNum = intTmp;
+            for (int j = m.Length - 1; j >= 0; j--)
+            {
+                for (int i = 0; i < n.Length; i++)
+                {
+                    if (j == m.Length - 1)
+                        intTmp = n[i] > intTmp ? n[i] : intTmp;
+                    else
+                    {
+                        if (n[i] < m[j + 1])
+                            intTmp = n[i] > intTmp ? n[i] : intTmp;
+                    }
+                }
+                m[j] = intTmp;
+                intTmp = intMinNum;
             }
         }
         #endregion

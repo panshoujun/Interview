@@ -101,9 +101,14 @@ namespace MyConsoleApplication
             #region 两个数组  [n] [m]  n>m  第一个数组的数字无序排列 第二个数组为空 取出第一个数组的最小值 放到第二个数组中第一个位置, 依次类推. 不能改变A数组，不能对之进行排序，也不可以倒到别的数组中。
             int[] n = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
             int[] m = new int[10];
+            Helper.GetArr(n, m);
+            Console.WriteLine(string.Format("数组outputM={0}", string.Join(",", m)));
             Helper.GetArr2(n, m);
-            string[] outputM = Array.ConvertAll<int, string>(m, i => i.ToString());
-            Console.WriteLine(string.Format("数组outputM={0}", string.Join(",", outputM)));
+            Console.WriteLine(string.Format("数组outputM={0}", string.Join(",", m)));
+            Helper.GetArrNew(n, m);
+            Console.WriteLine(string.Format("取最大数组outputM={0}", string.Join(",", m)));
+            Helper.GetArr2New(n, m);
+            Console.WriteLine(string.Format("取最大数组outputM={0}", string.Join(",", m)));
             Console.WriteLine();
             #endregion
 
