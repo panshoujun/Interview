@@ -79,13 +79,13 @@ namespace MyConsoleApplication
 
             List<string> bList = new List<string> { "a", "b", "c", "c", "1", "2", "3", "1" };
             Console.WriteLine(string.Format("删除集合给定元素前aList={0}", string.Join(",", bList)));
-            Helper.deleteForm(bList, "1",true);
+            Helper.deleteForm(bList, "1", true);
             Console.WriteLine(string.Format("删除集合给定元素后aList={0}", string.Join(",", bList)));
             Console.WriteLine();
             #endregion
 
             #region 数组合并去重
-            int[] arryA = { 1, 2, 3, 4,4, 5 };
+            int[] arryA = { 1, 2, 3, 4, 4, 5 };
             int[] arryB = { 3, 5, 6 };
             //string[] outputA = Array.ConvertAll<int, string>(arryA, i => i.ToString());
             Console.WriteLine(string.Format("数组合并去重数组arryA={0}", string.Join(",", arryA)));
@@ -116,6 +116,9 @@ namespace MyConsoleApplication
             var array = Helper.CreateArr(10);
             string[] outputArray = Array.ConvertAll<int, string>(array, i => i.ToString());
             Console.WriteLine(string.Format("数组outputArray={0}", string.Join(",", outputArray)));
+
+            var arrayNew = Helper.CreateArr(10, 1, 100);
+            Console.WriteLine(string.Format("数组outputArray={0}", string.Join(",", arrayNew)));
             Console.WriteLine();
             #endregion
 

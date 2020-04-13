@@ -160,7 +160,7 @@ namespace algorithm
                 }
             }
 
-            List<int> list = new List<int>();
+            IList<int> list = new List<int>();
             for (int i = start; i <= end; i++)
             {
                 list.Add(arr[i]);
@@ -190,7 +190,7 @@ namespace algorithm
                     }
                 }
             }
-            List<int> list = new List<int>();
+            IList<int> list = new List<int>();
             for (int i = start; i <= end; i++)
             {
                 list.Add(arr[i]);
@@ -428,11 +428,29 @@ namespace algorithm
             if (count < 0)
                 throw new Exception("参数不合法");
             int[] intArr = new int[count];
-            List<int> myList = new List<int>();
+            IList<int> myList = new List<int>();
             Random rnd = new Random();
             while (myList.Count < count)
             {
                 int num = rnd.Next(1, count + 1);
+                if (!myList.Contains(num))
+                    myList.Add(num);
+            }
+            return myList.ToArray();
+        }
+
+        public static int[] CreateArr(int arrLength,int min,int max)
+        {
+            if (arrLength < 0)
+                throw new Exception("参数不合法");
+            if (min > max)
+                throw new Exception("范围起始不能大于结束");
+            int[] intArr = new int[arrLength];
+            IList<int> myList = new List<int>();
+            Random rnd = new Random();
+            while (myList.Count < arrLength)
+            {
+                int num = rnd.Next(min, max);
                 if (!myList.Contains(num))
                     myList.Add(num);
             }
@@ -634,7 +652,7 @@ namespace algorithm
             int result = 0;
             if (null == arry)
                 throw new Exception("arry不能为null");
-            List<int> list = new List<int>();
+            IList<int> list = new List<int>();
             foreach (var item in arry)
             {
                 if (!list.Contains(item))
@@ -871,7 +889,7 @@ namespace algorithm
         {
             if (null == arry)
                 throw new Exception("arry不能为null");
-            List<int> list = new List<int>();
+            IList<int> list = new List<int>();
             var goup = arry.GroupBy(m => m);
             var items = goup.Where(p => p.Count() >= minTimes);
             foreach (var item in items)
@@ -883,7 +901,7 @@ namespace algorithm
             if (null == arry)
                 throw new Exception("arry不能为null");
             Dictionary<int, int> dic = new Dictionary<int, int>();
-            List<int> list = new List<int>();
+            IList<int> list = new List<int>();
             foreach (var item in arry)
             {
                 if (dic.ContainsKey(item))
