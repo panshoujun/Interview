@@ -460,6 +460,8 @@ namespace algorithm
         }
         #endregion
 
+        //20200413
+
         #region 字符串处理
 
         /// <summary>
@@ -659,6 +661,30 @@ namespace algorithm
             {
                 if (!list.Contains(item))
                     list.Add(item);
+            }
+            result = list.Count;
+            return result;
+        }
+
+        public static int CalNotRepeatNew2(int[] arry)
+        {
+            int result = 0;
+            if (null == arry)
+                throw new Exception("arry不能为null");
+            IList<int> list = new List<int>();//不重复的
+            IList<int> listRepeat = new List<int>();//重复的
+            foreach (var item in arry)
+            {
+                if (listRepeat.Contains(item))
+                    continue;
+
+                if (!list.Contains(item))
+                    list.Add(item);
+                else
+                {
+                    list.Remove(item);
+                    listRepeat.Add(item);
+                }
             }
             result = list.Count;
             return result;

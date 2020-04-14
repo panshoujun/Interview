@@ -153,6 +153,9 @@ namespace MyConsoleApplication
             int[] arrySoftByBubble = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
             Helper.SoftByBubble(arrySoftByBubble, false);
             Console.WriteLine($"冒泡排序排序后={string.Join(",", arrySoftByBubble)}");
+
+            Helper.SoftByBubble(arrySoftByBubble, true);
+            Console.WriteLine($"冒泡排序排序后={string.Join(",", arrySoftByBubble)}");
             Console.WriteLine();
 
             int[] arrySoftBySelect = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
@@ -161,7 +164,7 @@ namespace MyConsoleApplication
             Console.WriteLine();
 
             int[] arrySoftByInsert = { -20, 9, 7, 37, 38, 69, 89, -1, 59, 29, 0, -25, 39, 900, 22, 13, 55 };
-            Helper.SoftByInsert(arrySoftByInsert, false);
+            Helper.SoftByInsert(arrySoftByInsert, true);
             Console.WriteLine($"插入排序排序后={string.Join(",", arrySoftByInsert)}");
             Console.WriteLine();
             #endregion
@@ -171,6 +174,7 @@ namespace MyConsoleApplication
             //CalNotRepeat(arryCalNotRepeat);
             Console.WriteLine($"计算后={Helper.CalNotRepeat(arryCalNotRepeat)}");
             Console.WriteLine($"计算后2={Helper.CalNotRepeatNew(arryCalNotRepeat)}");
+            Console.WriteLine($"计算后2={Helper.CalNotRepeatNew2(arryCalNotRepeat)}");
             Console.WriteLine();
             #endregion
 
