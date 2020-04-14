@@ -677,7 +677,6 @@ namespace algorithm
             {
                 if (listRepeat.Contains(item))
                     continue;
-
                 if (!list.Contains(item))
                     list.Add(item);
                 else
