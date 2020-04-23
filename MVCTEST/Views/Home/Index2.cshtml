@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+
+    var ViewBagStu = ViewBag.ViewBagStu;
+    Student stu = (Student)ViewData["ViewDataStu"];
+    Student stu2 = (Student)TempData["TempDataStu"];
+
+    string message = ViewData["message"] as string;
+}
+
+<h2>Index2</h2>
+
