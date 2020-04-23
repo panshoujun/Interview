@@ -1,0 +1,41 @@
+﻿MVC生命周期
+1当ASP.NET应用程序第一次启动的时候才会发生第一步。RouteTable把URL映射到Handler。
+2我们发起请求的时候发生。IIS请求处理管道接到请求后，就会加载UrlRoutingModule类型的Init()方法
+3当请求到达UrlRoutingModule的时候，UrlRoutingModule取出请求中的Controller、Action等RouteData
+信息，与路由表中的所有规则进行匹配，若匹配，把请求交给IRouteHandler，即MVCRouteHandler
+4MVCRouteHandler的作用是用来生成实现IHttpHandler接口的MvcHandler。
+(而我们前面说过最终处理请求的都是相对应的HttpHandler。那么处理MVC请求的自然就是这个MvcHandler)
+5我们知道一个httphandler需要实现一个ProcessRequest()的方法，这个方法就是处理request的核心。
+所以MvcHandler实现了ProcessRequest()方法。ProcessRequest主要功能：
+6在ProcessRequestInit()方法中首先创建了ControllerFactory()的对象 factory.然后ControllerFactory
+创建了相关Controller的实例.最终调用了Controller的Excute()方法。controller对象实际上
+使用ActionInvoker来调用Action方法的
+7Action方法调用完成后，就是返回一个ActionResult类型的数据。
+8ActionResult执行后响应输出到客户端。(主要通过ViewEngine引擎来展示view的)
+
+MVC有几种向页面绑定数据的方法
+1、指定页面数据的强类型Module  2、使用ViewData绑定到页面 3、使用ViewBag绑定到页面
+
+1什么是MVC (模型 视图 控制器)?
+MVC是一个架构模式，它分离了表现与交互。它被分为三个核心部件：模型、视图、控制器。
+视图是用户看到并与之交互的界面。 
+模型表示业务数据，并提供数据给视图。 
+控制器接受用户的输入并调用模型和视图去完成用户的需求。
+
+2你能解释下MVC的完整流程吗？
+下面是MVC（模型、视图、控制器）架构的控制流程：
+所有的终端用户请求被发送到控制器。
+控制器依赖请求去选择加载哪个模型，并把模型附加到对应的视图。
+附加了模型数据的最终视图做为响应发送给终端用户。
+
+3使用MVC有哪些好处?
+MVC有两个大的好处：
+1分离了关注点。后台代码被移到单独的类文件，我们可以最大限度的重复利用代码。
+2自动化UI测试成为可能，因为后台代码移到了.NET类。这让我们更容易做单元测试和自动化测试。
+
+4tempdata, viewdata, 和viewbag之间不同点
+Temp data  -在不同的控制器或动作间转换时保持数据。另外，进行页面转向时，
+tempdata可以保持数据。它是一个内部的Session变量。
+View data  - 可以在控制器和视图间保持数据。
+View Bag  -  它是视图数据的动态包装。使用Viewbag不需要类型转换。
+它使用的是内部动态关健词。 

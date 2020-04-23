@@ -1,6 +1,3 @@
-MVC有几种向页面绑定数据的方法
-1、指定页面数据的强类型Module  2、使用ViewData绑定到页面 3、使用ViewBag绑定到页面
-
 查询第10页数据,每页8条 .Skip(72).Take(8)  
 Take(PageSize * CurPage).Skip(PageSize * (CurPage - 1));//进行分页
 
