@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyConsoleApplication
@@ -13,6 +14,12 @@ namespace MyConsoleApplication
         static int a = 0;
         static void Main(string[] args)
         {
+            Thread thread = new Thread(PrintNumbers);
+            thread.Start();
+            PrintNumbers();
+            Console.ReadLine();
+            return;
+
             Father father = new Father();
             father.PrintNew();
             father = new Son();
@@ -247,5 +254,17 @@ namespace MyConsoleApplication
         {
             a = 0;
         }
+
+        #region
+        static void PrintNumbers()
+        {
+            Console.WriteLine("starting---------");
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i);
+            }
+
+        }
+        #endregion
     }
 }
