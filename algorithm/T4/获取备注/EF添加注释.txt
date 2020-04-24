@@ -1,0 +1,21 @@
+public string GetRemark(EdmProperty edmProperty)
+	{		
+	//System.Diagnostics.Debugger.Launch();		
+	var tableName = edmProperty.DeclaringType.Name;		
+	var colName=_code.Escape(edmProperty);		
+	//System.Diagnostics.Debugger.Break();		
+	string sql = string.Format(@"SELECT ×Ö¶ÎËµÃ÷=isnull(props.[value],'') FROM syscolumns cols join sysobjects objs on cols.id= objs.id and  objs.xtype='U' and  objs.name<>'dtproperties' left join sys.extended_properties props on cols.id=props.major_id and cols.colid=props.minor_id where  objs.name='{0}' and cols.name='{1}'",tableName,colName);		
+	string sqlcon = "Data Source=data.mgcc.com.cn;User ID=mgcc_cms_sa;Password=mgcc_cms_sa;Initial Catalog=_Demo";		
+	object remark=new object();		
+	using(System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(sqlcon))
+	{			conn.Open();			
+	System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(sql, conn);			
+	remark =cmd.ExecuteScalar();    		
+	}      			
+	return remark+"";	
+	}
+	
+	
+	/// <summary>
+	/// <#=codeStringGenerator.GetRemark(edmProperty)#>
+	/// </summary>
