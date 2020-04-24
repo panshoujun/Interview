@@ -114,7 +114,7 @@ namespace Common
                     DataTable dt = new DataTable();
                     adapter.SelectCommand.Parameters.AddRange(parameters);
                     adapter.Fill(dt);
-                    return dt;
+                    return dt;//
                 }
             }
         }
