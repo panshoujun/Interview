@@ -781,6 +781,7 @@ namespace algorithm
             StringBuilder sb = new StringBuilder();
             Stack<char> st = new Stack<char>();
             int tempVal = val;
+            //length = chars.Length;
             if (chars.Length < length || val > int.MaxValue || val < int.MinValue)
                 throw new Exception("参数不合法");
             if (val < 0)

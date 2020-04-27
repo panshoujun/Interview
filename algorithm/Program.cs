@@ -254,7 +254,8 @@ namespace MyConsoleApplication
             Console.WriteLine($"FindDuplication={string.Join(",", outputFindDuplication)}");
             #endregion
 
-
+            char[] sss = "1234".ToCharArray();
+            Helper.permutation(sss,0);
             Console.ReadLine();
         }
 
