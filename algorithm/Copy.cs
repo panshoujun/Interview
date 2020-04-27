@@ -14,5 +14,16 @@ namespace algorithm
             string str=JsonConvert.SerializeObject(this);
             return JsonConvert.DeserializeObject<Copy>(str);            
         }
+
+        public override bool Equals(object obj)
+        {
+            var s = this.name == ((Copy)obj).name;
+            return this.name == ((Copy)obj).name;
+        }
+
+        //public override int GetHashCode()
+        //{
+        //    return 0;
+        //}
     }
 }

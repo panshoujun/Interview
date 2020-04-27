@@ -11,14 +11,27 @@ namespace MyConsoleApplication
 {
     class Program
     {
+        readonly Copy copy1= new Copy() { Age = "2", name = "a" };
+        const Copy copy2 = null;//new Copy (){  Age="2",name="a"};
+           
         static int a = 0;
         static void Main(string[] args)
         {
-            Thread thread = new Thread(PrintNumbers);
-            thread.Start();
-            PrintNumbers();
-            Console.ReadLine();
-            return;
+            ArrayList arrayList = new ArrayList();            
+            string astr = "123";
+            string bstr = "123";
+            Console.WriteLine($"astr==bstr 是 {astr == bstr}");
+            Console.WriteLine($"astr.Equals(bstr) 是 {astr.Equals(bstr)}");
+
+            Copy copya = new Copy() { Age = "1", name = "a" };
+            Copy copyb = new Copy() { Age = "1", name = "a" };
+            Console.WriteLine($"copya==copyb 是 {copya == copyb}");
+            Console.WriteLine($"copya.Equals(copyb) 是 {copya.Equals(copyb)}");
+            //Thread thread = new Thread(PrintNumbers);
+            //thread.Start();
+            //PrintNumbers();
+            //Console.ReadLine();
+            //return;
 
             Father father = new Father();
             father.PrintNew();
