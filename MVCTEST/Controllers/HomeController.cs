@@ -12,6 +12,7 @@ namespace MVCTEST.Controllers
     {
         public ActionResult Index()
         {
+
             var count = SQLHelper.ExecuteScalar("select COUNT(*) from Student");
 
             var data = SQLHelper.ExecuteDataTable("select * from Student");
@@ -31,6 +32,15 @@ namespace MVCTEST.Controllers
             ViewBag.ViewBagStu = stu;
             ViewData["ViewDataStu"] = stu;
             TempData["TempDataStu"] = stu;
+
+            if (!RedisCacheHelper.Exists("NO001"))
+            {
+                RedisCacheHelper.Add<Student>("NO001", stu, DateTime.Now.AddMinutes(5));
+            }
+            else
+            {
+                var student = RedisCacheHelper.Get<Student>("NO001");
+            }
 
             return View();
         }
