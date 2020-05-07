@@ -28,3 +28,17 @@ by Student.stuId,Student.stuName having count(courseId) <(select count(courseId)
 加5分单门不能超过100
 update Score set Score=100 where Score>=95;
 update Score set Score=Score+5 where Score<95;
+
+--分页查询
+select * from (
+select *,ROW_NUMBER() over(order by S#) row from Student) T where row >5 and row <=10;
+
+select  top 5 * from Student where S# not in(
+select top 5 S# from Student) 
+-- 删除重复数据
+delete Student where S# not in (
+select MIN(S#) from Student group by Sname)
+
+DELETE FROM Student 
+WHERE  Sname in (SELECT Sname FROM Student GROUP BY Sname HAVING COUNT(Sname)>1)
+AND S# not in (SELECT MIN(S#) ids FROM Student GROUP BY Sname HAVING COUNT(Sname)>1)
