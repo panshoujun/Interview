@@ -1,0 +1,37 @@
+#RDB
+# 在几秒内改动了多少数据就触发持久化
+# 想禁用的话不设置save   或者save ""
+save 900 1
+save 300 10
+save 60 10000
+# 备份进程出错主进程停止写入操作
+stop-writes-on-bgsave-error yes
+# 是否压缩rdb文件 推荐no 相对于硬盘成本cpu更值钱
+rdbcompression yes
+
+
+#AOF
+# 默认关闭若要开启将no改为yes
+appendonly no
+
+# append文件的名字
+appendfilename "appendonly.aof"
+
+# AOF文件的写入方式
+# always一旦缓存区内容发生变化就写入AOF文件中
+appendfsync always
+# everysec 每个一秒将缓存区内容写入文件 默认开启的写入方式
+appendfsync everysec
+# 将写入文件的操作交由操作系统决定
+appendfsync no
+
+# 当AOF文件大小的增长率大于该配置项时自动开启重写（这里指超过原大小的100%）。
+auto-aof-rewrite-percentage 100
+# 当AOF文件大小大于该配置项时自动开启重写
+auto-aof-rewrite-min-size 64mb
+
+#RDB和AOF的优缺点
+#RDB优点：全量数据快照，文件小，恢复快
+#RDB缺点：无法保存最近一次快照之后的数据，数据量大会由于I/O严重影响性能
+#AOF优点：可读性高，适合保存增量数据，数据不一丢失
+#AOF缺点：文件体积大，恢复时间长

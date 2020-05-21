@@ -35,7 +35,7 @@ namespace MVCTEST.Controllers
 
             if (!RedisCacheHelper.Exists("NO001"))
             {
-                RedisCacheHelper.Add<Student>("NO001", stu, DateTime.Now.AddMinutes(5));
+                RedisCacheHelper.Add<Student>("NO001", stu, DateTime.Now.AddMinutes(15));
             }
             else
             {

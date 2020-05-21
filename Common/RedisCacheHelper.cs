@@ -6,34 +6,74 @@ using ServiceStack.Common.Extensions;
 
 namespace Common
 {
+    //主从架构的Redis的读写其实和单一Redis实例的读写差不多，只是部分配置和读取区分了主从
+    //不过我们需要注意的是：ServiceStack.Redis中GetClient() 的这个方法，默认只能拿到Master Redis中获取连接，而拿不到Slave的readonly连接。
+    //这样Slave起到了冗余备份的作用，读的功能没有发挥出来，如果并发请求太多的话，则Redis的性能会有影响。
+    //因此，我们需要的写入和读取的时候做一个区分，写入的时候，调用client.GetClient() 来获取writeHosts的Master的Redis链接。
+    //读取的时候则调用client.GetReadOnlyClient() 来获取的readonlyHost的Slave的Redis链接，或者可以直接使用client.GetCacheClient() 来获取一个连接，
+    //他会在写的时候调用GetClient获取连接，读的时候调用GetReadOnlyClient获取连接，这样可以做到读写分离，从而利用Redis的主从复制功能。
+
+
     /// <summary>
     /// Redis缓存帮助类
     /// </summary>
     public class RedisCacheHelper
     {
         private static readonly PooledRedisClientManager pool = null;
-        private static readonly string[] redisHosts = null;
+        //private static readonly string[] redisHosts = null;
+        private static readonly string[] writeHosts = null;
+        private static readonly string[] readHosts = null;
         public static int RedisMaxReadPool = int.Parse(ConfigurationManager.AppSettings["redis_max_read_pool"]);
         public static int RedisMaxWritePool = int.Parse(ConfigurationManager.AppSettings["redis_max_write_pool"]);
 
+        ///// <summary>
+        ///// 单个
+        ///// </summary>
+        //static RedisCacheHelper()
+        //{
+        //    var redisHostStr = ConfigurationManager.AppSettings["redis_server_session"];
+
+        //    if (!string.IsNullOrEmpty(redisHostStr))
+        //    {
+        //        redisHosts = redisHostStr.Split(',');
+
+        //        if (redisHosts.Length > 0)
+        //        {
+        //            pool = new PooledRedisClientManager(redisHosts, redisHosts,
+        //                new RedisClientManagerConfig()
+        //                {
+        //                    MaxWritePoolSize = RedisMaxWritePool,
+        //                    MaxReadPoolSize = RedisMaxReadPool,
+        //                    AutoStart = true
+        //                });
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// 主从
+        /// </summary>
         static RedisCacheHelper()
         {
-            var redisHostStr = ConfigurationManager.AppSettings["redis_server_session"];
+            var redisMasterHost = ConfigurationManager.AppSettings["redis_server_master_session"];
+            var redisSlaveHost = ConfigurationManager.AppSettings["redis_server_slave_session"];
 
-            if (!string.IsNullOrEmpty(redisHostStr))
+            if (!string.IsNullOrEmpty(redisMasterHost))
             {
-                redisHosts = redisHostStr.Split(',');
+                writeHosts = redisMasterHost.Split(',');
+                readHosts = redisSlaveHost.Split(',');
 
-                if (redisHosts.Length > 0)
+                if (readHosts.Length <= 0)
                 {
-                    pool = new PooledRedisClientManager(redisHosts, redisHosts,
+                    readHosts = writeHosts;
+                }
+                pool = new PooledRedisClientManager(writeHosts, readHosts,
                         new RedisClientManagerConfig()
                         {
                             MaxWritePoolSize = RedisMaxWritePool,
                             MaxReadPoolSize = RedisMaxReadPool,
                             AutoStart = true
                         });
-                }
             }
         }
 
@@ -143,6 +183,7 @@ namespace Common
             {
                 if (pool != null)
                 {
+                    //pool.GetReadOnlyClient
                     using (var r = pool.GetClient())
                     {
                         if (r != null)
