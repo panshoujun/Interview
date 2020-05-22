@@ -1,0 +1,4 @@
+﻿info replication 查看信息
+set 添加缓存
+get 获取缓存
+exists 是否存在缓存

@@ -28,14 +28,15 @@ namespace MVCTEST.Controllers
             ViewData["message"] = "这是ViewData(string)";
 
 
-            Student stu = new Student { Age = 10, Name = "潘守军", NO = "NO001" };
+            Student stu = new Student { Age = 320, Name = "潘守军3", NO = "NO003" };
+            //Student stu = new Student { Age = 10, Name = "潘守军", NO = "NO001" }//;
             ViewBag.ViewBagStu = stu;
             ViewData["ViewDataStu"] = stu;
             TempData["TempDataStu"] = stu;
 
-            if (!RedisCacheHelper.Exists("NO001"))
+            if (!RedisCacheHelper.Exists(stu.NO))
             {
-                RedisCacheHelper.Add<Student>("NO001", stu, DateTime.Now.AddMinutes(15));
+                RedisCacheHelper.Add<Student>(stu.NO, stu, DateTime.Now.AddMinutes(15));
             }
             else
             {

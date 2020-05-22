@@ -1,0 +1,6 @@
+﻿1SQL Error (1130): Host '192.168.1.100' is not allowed to connect to this MySQL server
+(说明所连接的用户帐号没有远程连接的权限，只能在本机(localhost)登录。需更改 mysql 数据库里的 user表里的 host项把localhost改称%)
+方法一(GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '7020110' WITH GRANT OPTION;
+FLUSH   PRIVILEGES;) 
+方法二(update user set host = '%'  where user ='root';
+flush privileges;)

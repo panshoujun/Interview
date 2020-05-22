@@ -102,6 +102,7 @@ namespace Common
             {
                 if (pool != null)
                 {
+                    
                     using (var r = pool.GetClient())
                     {
                         if (r != null)
