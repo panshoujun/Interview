@@ -4,3 +4,7 @@
 FLUSH   PRIVILEGES;) 
 方法二(update user set host = '%'  where user ='root';
 flush privileges;)
+
+2MySQL无故找不到服务
+a.以管理员身份执行cmd；
+b.切换到mysql安装目录下的bin目录，执行mysqld.exe  --install命令，看到service successfully installed.表示安装服务成功
