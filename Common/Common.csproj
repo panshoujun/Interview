@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\下载软件\SQL\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\下载软件\SQL\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>C:\Users\17597\Desktop\DLL\ServiceStack.Common.dll</HintPath>
     </Reference>
@@ -56,10 +63,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisCacheHelper.cs" />
     <Compile Include="SqlHelper\MySql\SqlHelperByMySql.cs" />
+    <Compile Include="SqlHelper\MySql\SqlHelperBySqlExtension.cs" />
     <Compile Include="SqlHelper\SqlServer\SQLHelper.cs" />
     <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServer.cs" />
     <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServerExtension.cs" />
     <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServerSchemaExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dll\AutoMapper.dll" />
+    <Content Include="Dll\AutoMapper.xml" />
+    <Content Include="Dll\MySql.Data.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
