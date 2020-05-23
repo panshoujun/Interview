@@ -55,7 +55,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisCacheHelper.cs" />
-    <Compile Include="SQLHelper.cs" />
+    <Compile Include="SqlHelper\MySql\SqlHelperByMySql.cs" />
+    <Compile Include="SqlHelper\SqlServer\SQLHelper.cs" />
+    <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServer.cs" />
+    <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServerExtension.cs" />
+    <Compile Include="SqlHelper\SqlServer\SqlHelperBySqlServerSchemaExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
