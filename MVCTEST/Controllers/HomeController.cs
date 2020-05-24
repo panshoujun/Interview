@@ -13,17 +13,17 @@ namespace MVCTEST.Controllers
         public ActionResult Index()
         {
 
-            var count = SQLHelper.ExecuteScalar("select COUNT(*) from Student");
+            //var count = SQLHelper.ExecuteScalar("select COUNT(*) from Student");
 
-            var data = SQLHelper.ExecuteDataTable("select * from Student");
+            //var data = SQLHelper.ExecuteDataTable("select * from Student");
 
-            var countStudent = int.Parse(SQLHelper.ExecuteScalar("select COUNT(*) from Student where S#='10' ").ToString());
-            if (countStudent > 0)
-            {
-                var temp = SQLHelper.ExecuteNonQuery("delete from Student where S#='10' ");
-            }
+            //var countStudent = int.Parse(SQLHelper.ExecuteScalar("select COUNT(*) from Student where S#='10' ").ToString());
+            //if (countStudent > 0)
+            //{
+            //    var temp = SQLHelper.ExecuteNonQuery("delete from Student where S#='10' ");
+            //}
 
-            var insert = SQLHelper.ExecuteNonQuery("insert into student (s#,Sname,Sage,Ssex) values('10','aaaa','1990-04-01 00:00:00.000','男')");
+            //var insert = SQLHelper.ExecuteNonQuery("insert into student (s#,Sname,Sage,Ssex) values('10','aaaa','1990-04-01 00:00:00.000','男')");
 
             ViewData["message"] = "这是ViewData(string)"+ IPHepler.GetLocalIP();
 
