@@ -25,7 +25,8 @@ namespace MVCTEST.Controllers
 
             var insert = SQLHelper.ExecuteNonQuery("insert into student (s#,Sname,Sage,Ssex) values('10','aaaa','1990-04-01 00:00:00.000','男')");
 
-            ViewData["message"] = "这是ViewData(string)";
+            ViewData["message"] = "这是ViewData(string)"+ IPHepler.GetLocalIP();
+
 
 
             Student stu = new Student { Age = 320, Name = "潘守军3", NO = "NO003" };
