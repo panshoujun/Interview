@@ -219,7 +219,7 @@ namespace Common
                     using (var r = pool.GetClient())
                     {
                         if (r != null)
-                        {
+                        {                            
                             r.SendTimeout = 1000;
                             r.Remove(key);
                         }
