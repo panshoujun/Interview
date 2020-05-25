@@ -1,0 +1,13 @@
+﻿1下载nginx
+2使用命令进入nginx压缩后的目录 (cmd.exe)
+cd C:\Users\17597\Desktop\nginx-1.18.0
+3、启动nginx服务，启动时会一闪而过是正常的
+start nginx
+4、查看任务进程是否存在，dos或打开任务管理器都行
+tasklist /fi "imagename eq nginx.exe"
+
+
+
+常见问题(如果有错误查看log日志)
+1bind() to 0.0.0.0:80 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+找到nginx.conf直接修改nginx中的端口 listen 8080 
