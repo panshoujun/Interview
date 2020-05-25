@@ -11,3 +11,18 @@ tasklist /fi "imagename eq nginx.exe"
 常见问题(如果有错误查看log日志)
 1bind() to 0.0.0.0:80 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
 找到nginx.conf直接修改nginx中的端口 listen 8080 
+
+
+常用命令
+查看nginx的版本号：nginx -v
+
+启动nginx：start nginx
+
+快速停止或关闭nginx：nginx -s stop
+
+正常停止或关闭nginx：nginx -s quit
+
+配置文件nginx.conf修改重装载命令：nginx -s reload
+
+查看任务进程是否存在，dos或打开任务管理器都行
+tasklist /fi "imagename eq nginx.exe"

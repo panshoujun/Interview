@@ -24,23 +24,50 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Count)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <input type="button" value="下单" onclick="BuyProduct('@item.ID')" />
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+<script>
+
+    function BuyProduct(id) {
+        $.ajax({
+            type: "post",
+            datetype: "json",
+            data: { ProductID: id, BuyCount: 1 },
+            url: "/ProductMng/BuyProduct",
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('error');
+            },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert(result.Msg);
+                }
+                else {
+                    alert(result.Msg);
+
+                }
+            }
+
+        });
+    }
+
+</script>

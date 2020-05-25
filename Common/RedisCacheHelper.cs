@@ -102,7 +102,7 @@ namespace Common
             {
                 if (pool != null)
                 {
-                    
+
                     using (var r = pool.GetClient())
                     {
                         if (r != null)
@@ -219,7 +219,7 @@ namespace Common
                     using (var r = pool.GetClient())
                     {
                         if (r != null)
-                        {                            
+                        {
                             r.SendTimeout = 1000;
                             r.Remove(key);
                         }
@@ -262,6 +262,39 @@ namespace Common
             }
 
             return false;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static long Decrement(string key, int count)
+        {
+            long result = 0;
+            try
+            {
+                if (pool != null)
+                {
+                    using (var r = pool.GetClient())
+                    {
+                        if (r != null)
+                        {
+                            r.SendTimeout = 1000;
+                            result = r.DecrementValueBy(key, count);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = string.Format("{0}:{1}发生异常!{2}  Error:{3}", "cache", "获取", key, ex.Message);
+                throw new Exception(msg);
+            }
+
+            return result;
         }
     }
 }
