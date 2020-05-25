@@ -19,4 +19,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="数据库\sqlserver\" />
+    <Folder Include="集群负载均衡\haproxy\" />
+  </ItemGroup>
+
 </Project>
