@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -31,10 +32,34 @@ namespace Helpers
             this.ConnectionString = connectionString;
         }
 
+        #region 数据库连接字符串
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
         public string ConnectionString { get; set; }
+
+        /// <summary>
+        /// 写连接字符串
+        /// </summary>
+        public string ConnectionStringWrite = ConfigurationManager.AppSettings["ConnectionStringWrite"].ToString();
+
+        /// <summary>
+        /// 读连接字符串
+        /// </summary>
+        public string ConnectionStringRead = ConfigurationManager.AppSettings["ConnectionStringRead"].ToString();
+
+
+        /// <summary>
+        /// 读连接字符串数组
+        /// </summary>
+        public string[] ConnectionStringReadArr
+        {
+            get
+            {
+                return ConnectionStringRead.Split(',');
+            }
+        }
+        #endregion
 
         #region 实例方法
 

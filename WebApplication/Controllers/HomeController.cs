@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Common.SqlHelper.MySql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Models.Dto;
 
 namespace WebApplication.Controllers
 {
@@ -12,6 +14,7 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
+           
             ViewData["message"] = $"ID={GetLocalIP()}";
             return View();
         }
