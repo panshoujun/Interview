@@ -14,9 +14,10 @@ namespace WebApplication.Controllers
         // GET: ProductMng
         public ActionResult Index()
         {
-            var list = MysqlHelper.ExecuteObjects<ProductDto>("select * from Product");
-            ViewData["message"] = $"ID={IPHepler.GetLocalIP()}";
-            return View(list);
+            var resp = MysqlHelper.ExecuteObjects<List<ProductDto>>("select * from Product");
+            ViewData["ServerIP"] = $"服务器IP={IPHepler.GetLocalIP()}";
+            ViewData["DataBaseUrl"] = $"数据库链接={resp.Msg}";
+            return View(resp.Data);
         }
     }
 }

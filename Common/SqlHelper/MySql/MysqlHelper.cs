@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using WebApplication.Models.Dto.Base;
 
 namespace Common.SqlHelper.MySql
 {
@@ -56,6 +57,7 @@ namespace Common.SqlHelper.MySql
         {
             if (IsRead)
             {
+                UseCount++;
                 return _ConnectionStringReadArr[UseCount % _ConnectionStringReadArr.Length];
             }
             else
@@ -156,16 +158,20 @@ namespace Common.SqlHelper.MySql
 
         }
 
-        public static List<T> ExecuteObjects<T>(string SQLString)
+        public static BaseDtoResp<T> ExecuteObjects<T>(string SQLString)
         {
-            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
-            using (MySqlCommand cmd = connection.CreateCommand())
+            using (MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            using (MySqlCommand cmd = conn.CreateCommand())
             {
-                connection.Open();
+                conn.Open();
                 cmd.CommandText = SQLString;
-                return AutoMapper.Mapper.DynamicMap<List<T>>(cmd.ExecuteReader());
+                BaseDtoResp<T> resp = new BaseDtoResp<T>();
+                resp.Msg = conn.ConnectionString;
+                resp.Data = AutoMapper.Mapper.DynamicMap<T>(cmd.ExecuteReader());
+                return resp;
             }
         }
+
         #endregion
     }
 }

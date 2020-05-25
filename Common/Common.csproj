@@ -76,5 +76,11 @@
     <Content Include="Dll\AutoMapper.xml" />
     <Content Include="Dll\MySql.Data.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{a5fa52a0-5647-462b-850d-022ecf593fb3}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

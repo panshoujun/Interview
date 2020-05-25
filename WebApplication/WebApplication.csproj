@@ -192,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Dto\Base\" />
+    <Folder Include="Models\Dto\Req\" />
+    <Folder Include="Models\Dto\Resp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -210,6 +213,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{32ad9820-289b-4a16-b880-710ec8273c84}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{a5fa52a0-5647-462b-850d-022ecf593fb3}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
