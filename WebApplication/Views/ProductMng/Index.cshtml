@@ -10,6 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<input type="number" id="count" value="1" />
 <table class="table">
     <tr>
         <th>
@@ -52,7 +53,7 @@
         $.ajax({
             type: "post",
             datetype: "json",
-            data: { ProductID: id, BuyCount: 1 },
+            data: { ProductID: id, BuyCount: $('#count').val() },
             url: "/ProductMng/BuyProduct",
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert('error');
