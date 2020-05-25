@@ -26,6 +26,7 @@ replicate-do-db=psj #用于master-slave的具体数据库
 stop slave
 再改变它的master
 change master to master_host='192.168.0.100',master_user='root',master_password='7020110',master_log_file='mysql-bin.000003',master_log_pos=412
+change master to master_host='192.168.184.1',master_user='root',master_password='7020110',master_log_file='mysql-bin.000011',master_log_pos=154
 再启动它的slave
 start slave;
 然后再输入如下代码，检查是否成功

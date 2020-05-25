@@ -98,22 +98,53 @@ namespace Common.SqlHelper.MySql
         /// </summary>
         /// <param name="SQLString">查询语句</param>
         /// <returns>DataSet</returns>
-        public static DataTable Query(string SQLString)
+        public static DataTable QueryOld(string SQLString)
         {
             using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
             {
                 DataSet ds = new DataSet();
+                DataTable table = new DataTable();
                 try
                 {
                     connection.Open();
                     MySqlDataAdapter command = new MySqlDataAdapter(SQLString, connection);
-                    command.Fill(ds, "ds");
+                    command.Fill(table);
                 }
-                catch (System.Data.SqlClient.SqlException ex)
+                catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
-                return ds.Tables[0];
+                return table;
+            }
+        }
+
+        public static DataTable Query(string SQLString)
+        {
+            DataTable table = new DataTable();
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            {
+                connection.Open();
+                using (MySqlDataAdapter command = new MySqlDataAdapter(SQLString, connection))
+                {
+                    command.Fill(table);
+                }
+                return table;
+            }
+        }
+
+
+        public static MySqlDataReader ExecuteReader(string sql, params MySqlParameter[] ps)
+        {
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            using (MySqlCommand cmd = connection.CreateCommand())
+            {
+                connection.Open();
+                cmd.CommandText = sql;
+                if (ps != null)
+                {
+                    cmd.Parameters.AddRange(ps);
+                }
+                return cmd.ExecuteReader();
             }
         }
 
@@ -127,8 +158,13 @@ namespace Common.SqlHelper.MySql
 
         public static List<T> ExecuteObjects<T>(string SQLString)
         {
-            DataTable dt = Query(SQLString);
-            return AutoMapper.Mapper.DynamicMap<List<T>>(dt.CreateDataReader());
+            using (MySqlConnection connection = new MySqlConnection(GetConnectionString()))
+            using (MySqlCommand cmd = connection.CreateCommand())
+            {
+                connection.Open();
+                cmd.CommandText = SQLString;
+                return AutoMapper.Mapper.DynamicMap<List<T>>(cmd.ExecuteReader());
+            }
         }
         #endregion
     }
