@@ -1,0 +1,35 @@
+﻿-- 1exists 和 in  用法
+select * from Student s where exists ( 
+select sc.score from sc sc where s.S#=sc.S# and sc.C#=01)
+
+select * from Student s where s.S# in ( 
+select sc.S# from sc sc where  sc.C#=01);
+-- 2分页查询
+select * from (
+select *,ROW_NUMBER() over(order by S#) row from Student) T where row >5 and row <=10;
+
+select  top 5 * from Student where S# not in(
+select top 5 S# from Student) 
+-- 删除重复数据
+delete Student where S# not in (
+select MIN(S#) from Student group by Sname)
+-- 排名
+select *,RANK() over(order by score desc) from SC where sc.C#=01; (单科成绩,可以用un)
+
+select *,RANK() over(order by sumscore desc) from (
+select S#,SUM(score) sumscore from SC group by S# ) T;  （总成绩）
+-- 行转列 多列
+select  s.SNAME,s.S#
+,MAX(case c# when 111 then score else 0 end),MAX(case c# when 112 then score else 0 end)
+,MAX(case c# when 113 then score else 0 end) ,MAX(case c# when 114 then score else 0 end)  
+from sc inner join student s on s.S#=sc.S#
+group by s.SNAME,s.S# -- 使用case when连表显示中文
+-- 行转列 一列  显示每位同学的每科成绩
+SELECT * FROM sc PIVOT (SUM(score) FOR sc.c# IN ([111],[112],[113],[114]))T --最简单
+
+select *,(select ','+c.CNAME  from sc inner join course c on sc.C#=c.C#  
+where sc.S#=s.S# for xml path('')) 所学课程 from student s;-- 采用连表
+-- 拷贝表(拷贝数据)
+insert into b(a, b, c) select d,e,f from a; 
+-- 复制表(表机构)
+ select * into b from a where 1<>1  (where1=1，拷贝表结构和数据内容)
