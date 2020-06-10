@@ -1,0 +1,6 @@
+﻿参考网站
+https://www.jianshu.com/p/614a3ab57c36
+
+1setting->general
+2general->ssl certificate verification 关闭
+3Certificates 增加https地址信息
