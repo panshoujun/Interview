@@ -1,0 +1,13 @@
+﻿
+swagger安装
+Nuget搜索swagger，然后安装Swashbuckle(Install-Package Swashbuckle -Version 5.6.0)
+
+swagger使用
+生成api的xml文档(webapi项目右键——属性——生产——输出)
+
+
+
+扩展
+1汉化
+新建一个js，目录/Scripts/Swagger/SwaggerDescProvider.js，属性设置为[嵌入的资源]
+在EnableSwaggerUi添加代码c.InjectJavaScript(thisAssembly, "WebApiServices.Scripts.Swagger.SwaggerDescProvider.js");
