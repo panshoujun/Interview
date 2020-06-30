@@ -24,4 +24,23 @@
     <Folder Include="集群负载均衡\haproxy\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="T4\获取数据库实体\Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Models.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="T4\获取数据库实体\Models.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
